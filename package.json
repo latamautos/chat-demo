@@ -1,0 +1,28 @@
+{
+  "name": "latamautos-chat-demo",
+  "version": "0.0.1",
+  "author": "Xavier Ramirez",
+  "dependencies": {
+    "firebase": "^2.2.9",
+    "flux": "^2.0.1",
+    "object-assign": "^1.0.0",
+    "react": "^0.12.2"
+  },
+  "devDependencies": {
+    "browserify": "^6.2.0",
+    "envify": "^3.0.0",
+    "reactify": "^0.15.2",
+    "uglify-js": "~2.4.15",
+    "watchify": "^2.1.1"
+  },
+  "scripts": {
+    "start": "watchify -o js/bundle.js -v -d js/main.js",
+    "build": "browserify . -t [envify --NODE_ENV production] | uglifyjs -cm > js/bundle.min.js"
+  },
+  "browserify": {
+    "transform": [
+      "reactify",
+      "envify"
+    ]
+  }
+}
