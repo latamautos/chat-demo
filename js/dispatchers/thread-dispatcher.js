@@ -2,9 +2,9 @@
  * Created by xavier on 9/23/15.
  */
 var Dispatcher = require('flux').Dispatcher;
-var merge  = require('react/lib/merge');
+var assign = require('react/lib/Object.assign');
 
-var ThreadDispatcher = merge(Dispatcher.prototype, {
+var ThreadDispatcher = assign(new Dispatcher(), {
 	handleViewAction: function(action){
 		this.dispatch({
 			source: 'VIEW_ACTION',

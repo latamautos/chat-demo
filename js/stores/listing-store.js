@@ -6,20 +6,23 @@ var assign = require('react/lib/Object.assign');
 var EventEmitter = require('events').EventEmitter;
 var Firebase = require('firebase');
 
-var CHANGE_THREAD_LIST = "CHANGE_THREAD_LIST";
+var CHANGE_THREAD_LIST = "CHANGE_LISTING_LIST";
 
 var firebaseWasInitiallize = false;
 
-var threadItems = [];
+var ListingItems = [];
 
 var initializeFirebase = function () {
 	firebaseWasInitiallize = true;
 	var threadsRef = new Firebase('https://latamautos-chat.firebaseio.com/ecuador/threads');
-	threadsRef.on("child_added", function (snapshot, prevChildKey) {
-		var thread =snapshot.val();
-		threadItems.push(thread)
-		ThreadStore.emitChange()
-	});
+	threadsRef.orderBy('genre')
+		.startAt('comedy').endAt('comedy')
+		.on('value', function(snapshot) {
+			var movie = snapshot.val();
+			if (movie.lead == 'Jack Nicholson') {
+				console.log(movie);
+			}
+		});
 };
 
 var ThreadStore = assign(new EventEmitter(), {

@@ -1,6 +1,6 @@
 var React = require('react');
 var ThreadStore = require('../stores/thread-store');
-
+var ThreadItem = require('./thread-item');
 
 function getThreadItems(){
 	return {
@@ -16,7 +16,7 @@ var ThreadSection = React.createClass({
 		return ThreadStore.addChangeListener(this._onChange)
 	},
 	_onChange: function(){
-		this.setState(getThreadItems)
+		this.setState(getThreadItems())
 	},
 
 	render: function () {
